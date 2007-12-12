@@ -1,0 +1,34 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=2091
+
+" Title:        Verilog HDL/SystemVerilog HDVL indent file
+" Maintainer:	Mingzhi Li <limingzhi05@mail.nankai.edu.cn>
+" Last Change:	2007-12-16 20:10:57 CST
+"
+" Buffer Variables:
+"     b:verilog_indent_width   : indenting width(default value: shiftwidth)
+"
+" Install:
+"     Drop it to ~/.vim/indent 
+"
+" URL:
+"    http://www.vim.org/scripts/script.php?script_id=2091
+"
+" Revision Comments:
+"     Mingzhi Li  2007-12-16 20:09:39 CST Version 1.2      
+"        Bug fixes
+"     Mingzhi Li  2007-12-13 23:47:54 CST Version 1.1      
+"        Bug fix, improve performance and add introductions
+"     Mingzhi Li  2007-12-7  22:16:41 CST Version 1.0  
+"        Initial version
+"       
+" Known Limited:
+"     This indent file can not work well, when you break the long line into
+"     multi-line manually, such as:
+"      always @(posedge a or posedge b 
+"          or posedge c ) begin
+"         //...
+"      end 
+"     Recommend to use the coding style(wraped by vim automatically) as following:
+"       always @(posedge a or posedge b or posedge c ) begin
+"         //...
+"       end 
