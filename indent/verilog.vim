@@ -1,6 +1,6 @@
 " Title:        Verilog HDL/SystemVerilog HDVL indent file
 " Maintainer:	Mingzhi Li <limingzhi05@mail.nankai.edu.cn>
-" Last Change:	2007-12-13 23:48:17 CST
+" Last Change:	2007-12-16 20:10:57 CST
 "
 " Buffer Variables:
 "     b:verilog_indent_width   : indenting width(default value: shiftwidth)
@@ -12,6 +12,8 @@
 "    http://www.vim.org/scripts/script.php?script_id=2091
 "
 " Revision Comments:
+"     Mingzhi Li  2007-12-16 20:09:39 CST Version 1.2      
+"        Bug fixes
 "     Mingzhi Li  2007-12-13 23:47:54 CST Version 1.1      
 "        Bug fix, improve performance and add introductions
 "     Mingzhi Li  2007-12-7  22:16:41 CST Version 1.0  
@@ -152,9 +154,9 @@ function GetVerilog_SystemVerilogIndent()
   let ind  = indent(lnum)
 
   let curr_line_ind = s:comment_ind(v:lnum)
-  if curr_line_ind == -1
-    return ind
-  endif
+  "if curr_line_ind == -1
+  "  return ind
+  "endif
 
   let curr_line  = s:removecommment(getline(v:lnum),curr_line_ind)
   let curr_line2 = substitute(curr_line,'^\s*','','')
