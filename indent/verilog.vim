@@ -12,6 +12,8 @@
 "    http://www.vim.org/scripts/script.php?script_id=2091
 "
 " Revision Comments:
+"     Mingzhi Li  2012-03-13 23:15:39 CST Version 1.3
+"        Bug fixes
 "     Mingzhi Li  2007-12-16 20:09:39 CST Version 1.2      
 "        Bug fixes
 "     Mingzhi Li  2007-12-13 23:47:54 CST Version 1.1      
@@ -63,6 +65,7 @@ function s:comment_ind(lnum)
   endif
 
   let endPos   = match(line,'\s*$') 
+
   let flag1 = 0
   let flag2 = 0
   if (synIDattr(synID(a:lnum, firstPos, 1), "name") =~? '\(Comment\|String\)$')
@@ -122,14 +125,11 @@ function s:removecommment(line,comment_ind)
     return substitute(a:line,'^.\{-}\*\/',"","")
   endif
 
-  let myline01 = a:line;
-  
   if (a:comment_ind == 3)
-    let myline01 = substitute(myline01,'^.\{-}\*\/',"","")
+    return substitute(a:line,'^.\{-}\*\/',"","")
   endif
 
-  let myline01 = substitute(myline01,'\/\*.*$',"","")
-  return substitute(myline01,'\/\/.*$',"","")
+  return substitute(a:line,'\/\(\/\|\*\).*$',"","")
 
 endfunction
 
@@ -225,7 +225,6 @@ function GetVerilog_SystemVerilogIndent()
   let last_line_ind = s:comment_ind(lnum)
   let last_line  = s:removecommment(getline(lnum),last_line_ind)
  
-
   let indent0 = 0
   let indent1 = 0
   let indent2 = 0
@@ -239,6 +238,7 @@ function GetVerilog_SystemVerilogIndent()
   let pat5 = '\<\(case\%[[zx]]\|task\|function\|class\|interface\|clocking\|randcase\|package\|specify\)\>'
   let pat6 = '^\s*\(\w\+\s*:\)\=\s*\<covergroup\>'
   let pat7 = '^\s*\<\(begin\|fork\)\>\s*\(:\s*\w\+\s*\)\='
+  let pat8 = '^\s*`\<\(else\|endif\)\>'
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -261,8 +261,7 @@ function GetVerilog_SystemVerilogIndent()
   let sum1 = indent0 + indent1 + indent2
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-  if (curr_line =~ pat7 || curr_line =~ '^\s*{')
+  if (curr_line =~ pat7 || curr_line =~ pat8 || curr_line =~ '^\s*{')
     let de_indent0 = 1
   endif
 
